@@ -63,28 +63,28 @@ namespace HMQuickStart.Areas.Identity.Pages.Admin.Roles
             };
         }
 
-        public void VersionClaimTypes()
-        {
-            AllVersionClaims = new List<string>
-            {
-                "CanViewVersions",
-                "CanAddVersions",
-                "CanEditVersions",
-                "CanDeleteVersions"
-            };
-        }
+        //public void VersionClaimTypes()
+        //{
+        //    AllVersionClaims = new List<string>
+        //    {
+        //        "CanViewVersions",
+        //        "CanAddVersions",
+        //        "CanEditVersions",
+        //        "CanDeleteVersions"
+        //    };
+        //}
 
         public async Task<IActionResult> OnGetAsync()
         {
             List<RoleClaim> roleClaims = new List<RoleClaim>();
             List<RoleClaim> userClaims = new List<RoleClaim>();
-            List<RoleClaim> versionClaims = new List<RoleClaim>();
+            //List<RoleClaim> versionClaims = new List<RoleClaim>();
             var RoleToUpdate = TempData["UpdateRole"].ToString();
             GetRole = await _roleManager.FindByIdAsync(RoleToUpdate);
             Claims = await _roleManager.GetClaimsAsync(GetRole) as List<Claim>;
             RoleClaimTypes();
             UserClaimTypes();
-            VersionClaimTypes();
+            //VersionClaimTypes();
 
             foreach (var claim in AllRoleClaims)
             {
@@ -139,36 +139,36 @@ namespace HMQuickStart.Areas.Identity.Pages.Admin.Roles
                 }
             }
 
-            foreach (var claim in AllVersionClaims)
-            {
-                if (claim.Contains("Version"))
-                {
-                    /////
-                    if (Claims.Exists(x => x.Type == claim))
-                    {
-                        RoleClaim newClaim = new RoleClaim
-                        {
-                            claim = claim,
-                            Selected = true
-                        };
-                        versionClaims.Add(newClaim);
-                    }
-                    else
-                    {
-                        RoleClaim newClaim = new RoleClaim
-                        {
-                            claim = claim,
-                            Selected = false
-                        };
-                        versionClaims.Add(newClaim);
-                    }
-                    ////
-                }
-            }
+            //foreach (var claim in AllVersionClaims)
+            //{
+            //    if (claim.Contains("Version"))
+            //    {
+            //        /////
+            //        if (Claims.Exists(x => x.Type == claim))
+            //        {
+            //            RoleClaim newClaim = new RoleClaim
+            //            {
+            //                claim = claim,
+            //                Selected = true
+            //            };
+            //            versionClaims.Add(newClaim);
+            //        }
+            //        else
+            //        {
+            //            RoleClaim newClaim = new RoleClaim
+            //            {
+            //                claim = claim,
+            //                Selected = false
+            //            };
+            //            versionClaims.Add(newClaim);
+            //        }
+            //        ////
+            //    }
+            //}
 
             RoleClaims = roleClaims;
             UserClaims = userClaims;
-            VersionClaims = versionClaims;
+            //VersionClaims = versionClaims;
 
             return Page();
         }

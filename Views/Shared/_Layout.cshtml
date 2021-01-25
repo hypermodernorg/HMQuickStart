@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HMQuickStart</title>
+    <meta name="keywords" content="@ViewBag.Keywords" />
+    <meta name="Description" content="@ViewBag.Description" />
     <link rel="stylesheet" href="~/css/custom.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -38,7 +40,17 @@
                 </div>
             </div>
         </nav>
+        @{ var homeClass = ""; } 
+        @if (ViewBag.IsHome == null) { homeClass = "bg-light p-4"; }
+
+            <main role="main" class="@homeClass">
+                @RenderBody()
+            </main>
+
+
         <main role="main" class="">
+
+
             @RenderBody()
         </main>
         <partial name="_FooterLinksPartial" />

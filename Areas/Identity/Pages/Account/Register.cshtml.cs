@@ -34,6 +34,15 @@ namespace HMQuickStart.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+
+            if (_userManager.Users.Count() == 0)
+            {
+                _logger.LogInformation("There are no users. Initiate create first user.");
+                //var firstUser = new FirstUser(true);
+      
+           
+            }
+
         }
 
         [BindProperty]
@@ -42,6 +51,11 @@ namespace HMQuickStart.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+
+        public class FirstUser
+        {
+            public bool IsFirstUser { get; set; }
+        }
 
         public class InputModel
         {
@@ -64,10 +78,15 @@ namespace HMQuickStart.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+     
+
+  
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }

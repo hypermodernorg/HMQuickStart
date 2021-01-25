@@ -17,6 +17,8 @@ namespace HMQuickStart.Controllers
         public IActionResult Index()
         {
             ViewBag.IsHome = true;
+            ViewBag.Description = "Hypermodern's asp.net core 5, bootstrap 5, Nlog, Entity Framework Core, Identity, sqlite, and SCSS quickstart template.";
+            ViewBag.Keywords = "Hypermodern, quickstart, asp.net core 5, bootstrap 5, Nlog, Entity Framework Core, Identity, SCSS, sqlite";
             return View();
         }
 
